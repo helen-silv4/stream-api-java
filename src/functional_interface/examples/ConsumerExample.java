@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public class ConsumerExample {
     /**
@@ -14,11 +15,11 @@ public class ConsumerExample {
 
     public static void main(String[] args) {
         // criar uma lista de números inteiros
-        List<Integer> numeros = Arrays.asList(1,2,3,4,5,6,7,8,9);
+        List<Integer> numeros = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
         // usar o Consumer com expressão lambda para imprimir números pares
         Consumer<Integer> imprimirNumeroPar = numero -> {
-            if (numero % 2 == 0){
+            if (numero % 2 == 0) {
                 System.out.println(numero);
             }
         };
@@ -30,18 +31,14 @@ public class ConsumerExample {
         numeros.stream().forEach(new Consumer<Integer>() {
             @Override
             public void accept(Integer n) {
-                if (n % 2 == 0){
+                if (n % 2 == 0) {
                     System.out.println(n);
                 }
             }
         });
 
         // simplificando com expressão Lambda
-        numeros.forEach(n -> {
-                if (n % 2 == 0){
-                    System.out.println(n);
-                }
-            }
-        );
+        numeros.stream().filter(n -> n % 2 == 0)
+                .forEach(System.out::println);
     }
 }
